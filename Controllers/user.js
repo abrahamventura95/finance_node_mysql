@@ -49,7 +49,7 @@ function validateRegister(body,callback) {
 };
 
 exports.getUsers = function(req,res) {
-	queries.getUsers(function(err,data){
+	user_queries.queries.getUsers(function(err,data){
 		res.json(data);
 	});
 };
@@ -82,3 +82,20 @@ exports.createUser = function(req,res) {
 		}
 	});
 };
+
+exports.login = function(req,res){
+	var obj = {
+	    email: req.body.email,
+	    password: req.body.password
+	  }
+	user_queries.login(obj, function(err,data){
+		if(data.code == 200){
+			var temp = {
+				email: req.body.email,
+				token: data.token
+			}
+			user_queries.postLogin(temp, function(err,data){});
+		}
+		res.json(data);
+	});
+}
