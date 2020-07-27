@@ -10,6 +10,16 @@ let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = process.env.secretOrKey || 'secret';
 
+exports.logOut = function (email, callback){
+	var sqlQuery = "UPDATE `user` SET  						\
+					`user`.`token` =NULL,					\
+					`user`.`status` = '0'					\
+					WHERE `user`.`email`='"+email+"'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}
+
 exports.postLogin = function (obj, callback){
 	var sqlQuery = "UPDATE `user` SET  						\
 					`user`.`token` ='"+obj.token+"',		\

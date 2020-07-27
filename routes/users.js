@@ -5,5 +5,7 @@ module.exports = function(app) {
 	app.route('/register')
 	  	.post(controller.createUser);
 	app.route('/login')
-	  	.post(controller.login);  	
+	  	.post(controller.login); 
+	app.route('/logout')
+	  	.put(controller.logout);  	
 };

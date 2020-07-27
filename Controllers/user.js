@@ -99,3 +99,9 @@ exports.login = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.logout = function(req,res){
+	user_queries.logOut(req.body.email, function(err,data){
+		res.json(data);
+	});
+}
