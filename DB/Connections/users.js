@@ -18,7 +18,7 @@ exports.logOut = function (email, callback){
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);
 	});
-}
+};
 
 exports.postLogin = function (obj, callback){
 	var sqlQuery = "UPDATE `user` SET  						\
@@ -28,7 +28,7 @@ exports.postLogin = function (obj, callback){
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);
 	});
-}
+};
 
 exports.login = function (obj, callback) {
 	var sqlQuery = "SELECT user.email, user.password, user.full_name, user.type, 	\
@@ -67,12 +67,24 @@ exports.login = function (obj, callback) {
 		}
 	  callback(err,message);
 	});
-}
+};
+
 exports.getUsers = function(callback) {
 	var sqlQuery = "SELECT user.email, user.full_name, user.type, user.gender	\
 					FROM user													\
 					Order by user.type";
 	DBHelper.doQuery(sqlQuery, function(err,data) {
+		callback(err,data);
+	});
+};
+
+exports.getUser = function(email,callback) {
+	var sqlQuery = "SELECT user.email, user.full_name, user.type, 	\
+						   user.gender, user.coin					\
+					FROM user										\
+					WHERE `user`.`email` = '" + email+"'";
+	DBHelper.doQuery(sqlQuery, function(err,data) {
+		console.log(data);
 		callback(err,data);
 	});
 };

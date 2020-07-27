@@ -25,15 +25,8 @@ function validateRegister(body,callback) {
 		 callback('Password confirm is required');
 	if(validator.isEmpty(body.full_name))
 		 callback('Name is required');
+
 	//Conditional validations
-	findRegisteredEmail(body.email,function(value){
-		if(value == 1)
-			 callback('Registered email');
-	});
-	findExistingCoin(body.coin,function(value){
-		if(value == 0)
-			 callback('Unregistered coin');
-	});
 	if(!validator.isEmail(body.email) )
 		 callback('Invalid email');
 	if(!validator.isLength(body.password, {min:6}))
@@ -45,11 +38,26 @@ function validateRegister(body,callback) {
 		 callback('User\'s type is wrong');
 	if(!validator.isIn(body.gender,['male','female','other']))
 		 callback('User\'s gender is wrong');
-	 callback('pass');
+
+	//Existing validations	
+	findRegisteredEmail(body.email,function(value){
+		if(value == 1){
+			callback('Registered email');
+		}else{
+			findExistingCoin(body.coin,function(value){
+				if(value == 0){
+					callback('Unregistered coin');
+				}else{
+					callback('pass');
+				}
+			});
+		}
+	});
 };
 
 exports.getUsers = function(req,res) {
-	user_queries.queries.getUsers(function(err,data){
+	user_queries.getUsers(function(err,data){
+		console.log('eree');
 		res.json(data);
 	});
 };
@@ -105,3 +113,11 @@ exports.logout = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.getUser = function(req,res) {
+	var email = req.param('email');
+	console.log(email);
+	user_queries.getUser(email, function(err,data){
+		res.json(data);
+	});
+};
