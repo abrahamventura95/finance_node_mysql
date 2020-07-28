@@ -12,3 +12,14 @@ exports.create = function (data,callback) {
 		callback(err,data);
 	});
 }
+
+exports.getIncome = function (email,callback) {
+	var sqlQuery = "SELECT coin, tag, amount, date	\
+					FROM	money_move				\
+					WHERE user ='"+ email + "'	AND	\
+						  type = 'income'			\
+					ORDER BY date DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}

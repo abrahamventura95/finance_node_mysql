@@ -71,3 +71,10 @@ exports.create = function (req,res) {
 		}
 	});
 }
+
+exports.getIncome = function(req,res){
+	var email = req.param('email');
+	queries.getIncome(email, function(err,data){
+		res.json(data);
+	});
+}

@@ -115,7 +115,6 @@ exports.logout = function(req,res){
 
 exports.getUser = function(req,res) {
 	var email = req.param('email');
-	console.log(email);
 	user_queries.getUser(email, function(err,data){
 		res.json(data);
 	});
