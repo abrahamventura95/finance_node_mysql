@@ -72,9 +72,14 @@ exports.create = function (req,res) {
 	});
 }
 
-exports.getIncome = function(req,res){
+exports.get = function(req,res){
 	var email = req.param('email');
-	queries.getIncome(email, function(err,data){
+	var type = req.param('type');
+	var obj = {
+		email: email,
+		type: type
+	};
+	queries.get(obj, function(err,data){
 		res.json(data);
 	});
 }
