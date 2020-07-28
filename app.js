@@ -7,6 +7,7 @@ const expressValidator = require('express-validator')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var movesRouter = require('./routes/moves');
 
 var app = express();
 
@@ -23,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 var User = require('./routes/users');
 User(app);
+var Move = require('./routes/moves');
+Move(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

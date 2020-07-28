@@ -57,7 +57,6 @@ function validateRegister(body,callback) {
 
 exports.getUsers = function(req,res) {
 	user_queries.getUsers(function(err,data){
-		console.log('eree');
 		res.json(data);
 	});
 };
