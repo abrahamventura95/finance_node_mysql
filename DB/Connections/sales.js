@@ -15,3 +15,14 @@ exports.create = function (data,callback) {
 		callback(err,data);
 	});
 }
+
+exports.get = function (data,callback) {
+	var sqlQuery = "SELECT coin, tag, product, quantity, amount, date		\
+					FROM	money_sales										\
+					WHERE user ='"+ data.email + "'	AND						\
+						  type = '" + data.type + "'						\
+					ORDER BY date DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}

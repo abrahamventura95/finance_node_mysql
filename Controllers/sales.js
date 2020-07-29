@@ -64,3 +64,13 @@ exports.create = function (req,res) {
 		}
 	});
 }
+
+exports.get = function (req,res){
+	var obj = {
+		email: req.param('email'),
+		type: req.param('type')
+	};
+	queries.get(obj,function(err,data){
+		res.json(data);
+	});
+}
