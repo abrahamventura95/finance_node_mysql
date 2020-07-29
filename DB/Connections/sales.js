@@ -51,3 +51,21 @@ exports.getCntM = function (data,callback){
 		callback(err,data);
 	});	
 }
+
+exports.balance = function (email,callback){
+	var sqlQuery = "SELECT (t1.totals - t2.totals) as balance, 	\
+							t1.totals as income,				\
+							t2.totals as outflow				\
+					FROM										\
+						(SELECT SUM(amount) as totals			\
+						 FROM money_sales						\
+						 WHERE user ='" + email +"' AND			\
+						 	   type = 'income') as t1, 			\
+						(SELECT SUM(amount) as totals			\
+						 FROM money_sales						\
+						 WHERE user ='" + email +"' AND			\
+						 	   type = 'outflow') as t2;" 			
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});	
+}

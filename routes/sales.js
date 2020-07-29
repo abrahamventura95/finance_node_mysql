@@ -7,5 +7,7 @@ module.exports = function(app) {
 	app.route('/sales_date')
 		.get(controller.getByDate);	
 	app.route('/sales_month')
-		.get(controller.getCntM);		
+		.get(controller.getCntM);
+	app.route('/sales_balance')
+		.get(controller.balance);
 };
