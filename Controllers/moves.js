@@ -70,3 +70,43 @@ exports.get = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.getAll = function(req,res){
+	var email = req.param('email');
+	queries.getAll(email, function(err,data){
+		res.json(data);
+	});
+}
+
+exports.getByDate = function(req,res){
+	var email = req.param('email');
+	var date = req.param('date');
+	var type = req.param('type');
+	var obj = {
+		email: email,
+		date: date,
+		type: type
+	};
+	queries.getByDate(obj, function(err,data){
+		res.json(data);
+	});
+}
+
+exports.getCntM = function(req,res){
+	var email = req.param('email');
+	var type = req.param('type');
+	var obj = {
+		email: email,
+		type: type
+	};
+	queries.getCntM(obj, function(err,data){
+		res.json(data);
+	});
+}
+
+exports.balance = function(req,res){
+	var email = req.param('email');
+	queries.balance(email, function(err,data){
+		res.json(data);
+	});
+}
