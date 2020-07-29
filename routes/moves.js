@@ -9,7 +9,7 @@ module.exports = function(app) {
 	app.route('/moves_date')
 		.get(controller.getByDate);	
 	app.route('/moves_month')
-		.get(controller.getByDate);	
+		.get(controller.getCntM);	
 	app.route('/moves_balance')
 		.get(controller.balance);	
 };
