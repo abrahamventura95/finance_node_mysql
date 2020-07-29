@@ -9,5 +9,7 @@ module.exports = function(app) {
 	app.route('/login')
 	  	.post(controller.login); 
 	app.route('/logout')
-	  	.put(controller.logout);  	
+	  	.put(controller.logout);
+	app.route('/user')
+		.put(controller.edit);	
 };
