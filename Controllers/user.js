@@ -43,6 +43,30 @@ function validateRegister(body,callback) {
 	});
 };
 
+function validateUpdate(body,callback) {
+	//Empty validation
+	if(validator.isEmpty(body.email))
+		 callback('Email is required');
+
+	//Conditional validations
+	if(body.password != undefined){
+		if(!validator.isLength(body.password, {min:6}))
+		 callback('The password must be at least 6 characters');
+	}
+	if(!validator.isIn(body.gender,['male','female','other']))
+		 callback('User\'s gender is wrong');
+
+	//Existing validations	
+	fun.findExistingCoin(body.coin,function(value){
+		if(value == 0){
+			callback('Unregistered coin');
+		}else{
+			callback('pass');
+		}
+	});
+		
+};
+
 exports.getUsers = function(req,res) {
 	user_queries.getUsers(function(err,data){
 		res.json(data);
@@ -107,3 +131,47 @@ exports.getUser = function(req,res) {
 		res.json(data);
 	});
 };
+
+exports.edit = function(req,res){
+	var hash = null;
+
+	if(req.body.password != undefined){
+		hash = bcrypt.hashSync(req.body.password, 10);
+	}
+	validateUpdate(req.body,function(value){
+		try{
+			if(value == 'pass'){
+				if(hash != null){
+					var user = {
+						email: req.body.email,
+					    full_name: req.body.full_name,
+					    coin: req.body.coin,
+						password: hash,
+						gender: req.body.gender
+					};
+					user_queries.edit(user, function(err,data){
+						res.json(data);
+					});
+				}else{
+					var user = {
+						email: req.body.email,
+					    full_name: req.body.full_name,
+					    coin: req.body.coin,
+						gender: req.body.gender
+					};
+					user_queries.edit(user, function(err,data){
+						res.json(data);
+					});
+				}
+			}else{
+				throw Error(value);
+			}
+		}catch(err){
+			obj = {
+				error: 400,
+				msg: err.message
+			};
+			res.json(obj);
+		}
+	});
+}

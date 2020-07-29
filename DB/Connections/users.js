@@ -109,3 +109,28 @@ exports.createUser = async function(data, callback) {
 		callback(err,data_result);
 	});
 };
+
+
+exports.edit = function(obj, callback) {
+	console.log('test1');
+	if(obj.password == null){
+		var sqlQuery = "UPDATE `user` SET  								\
+					`user`.`full_name` ='"+obj.full_name+"',		\
+					`user`.`coin` ='"+obj.coin+"',					\
+					`user`.`gender` ='"+obj.gender+"'				\
+					WHERE `user`.`email`='"+obj.email+"'";
+		DBHelper.doQuery(sqlQuery, function(err,data) {
+			callback(err,data);
+		});
+	}else{
+	  	var sqlQuery = "UPDATE `user` SET  								\
+						`user`.`full_name` ='"+obj.full_name+"',		\
+						`user`.`coin` ='"+obj.coin+"',					\
+						`user`.`gender` ='"+obj.gender+"',				\
+						`user`.`password` ='"+obj.password+"'			\
+						WHERE `user`.`email`='"+obj.email+"'";
+		DBHelper.doQuery(sqlQuery, function(err,data) {
+			callback(err,data);
+		});
+	}
+};
