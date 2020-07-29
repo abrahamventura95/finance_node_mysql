@@ -10,4 +10,6 @@ module.exports = function(app) {
 		.get(controller.getByDate);	
 	app.route('/moves_month')
 		.get(controller.getByDate);	
+	app.route('/moves_balance')
+		.get(controller.balance);	
 };

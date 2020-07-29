@@ -103,3 +103,10 @@ exports.getCntM = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.balance = function(req,res){
+	var email = req.param('email');
+	queries.balance(email, function(err,data){
+		res.json(data);
+	});
+}
