@@ -23,3 +23,13 @@ exports.get = function (data,callback) {
 		callback(err,data);
 	});
 }
+
+exports.getAll = function (email,callback) {
+	var sqlQuery = "SELECT coin, tag, amount, date, type		\
+					FROM	money_move							\
+					WHERE user ='"+ email + "'					\
+					ORDER BY date, type DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}

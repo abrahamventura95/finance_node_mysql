@@ -70,3 +70,10 @@ exports.get = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.getAll = function(req,res){
+	var email = req.param('email');
+	queries.getAll(email, function(err,data){
+		res.json(data);
+	});
+}

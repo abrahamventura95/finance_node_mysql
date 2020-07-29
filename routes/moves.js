@@ -4,4 +4,6 @@ module.exports = function(app) {
 	  	.post(controller.create);
 	app.route('/moves')
 		.get(controller.get);
+	app.route('/graphs')
+		.get(controller.getAll);
 };
