@@ -1,19 +1,6 @@
 var queries = require('../DB/Connections/moves');
+var fun = require('./functions');
 var validator = require('validator');
-var user_queries = require('../DB/Connections/users');
-var coin_queries = require('../DB/Connections/coins');
-
-function findRegisteredEmail(email, callback){
-	user_queries.existsEmail(email,function(err,data){
-		callback(data[0].value);
-	});
-}
-
-function findExistingCoin(coin, callback){
-	coin_queries.existsCoin(coin,function(err,data){
-		callback(data[0].value);
-	});
-}
 
 function validate(body, callback) {
 	//Empty validation
@@ -29,11 +16,11 @@ function validate(body, callback) {
 		 callback('Amount most be a number');
 	if(!validator.isIn(body.type,['income','outflow']))
 		 callback('Type is wrong');
-	findRegisteredEmail(body.email,function(value){
+	fun.findRegisteredEmail(body.email,function(value){
 		if(value == 0){
 			callback('Unregistered email');
 		}else{
-			findExistingCoin(body.coin,function(value){
+			fun.findExistingCoin(body.coin,function(value){
 				if(value == 0){
 					callback('Unregistered coin');
 				}else{

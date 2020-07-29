@@ -6,8 +6,6 @@ var logger = require('morgan');
 const expressValidator = require('express-validator')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var movesRouter = require('./routes/moves');
 
 var app = express();
 
