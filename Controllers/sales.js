@@ -74,3 +74,14 @@ exports.get = function (req,res){
 		res.json(data);
 	});
 }
+
+exports.getByDate = function(req,res){
+	var obj = {
+		email: req.param('email'),
+		date: req.param('date'),
+		type: req.param('type')
+	};
+	queries.getByDate(obj, function(err,data){
+		res.json(data);
+	});
+}

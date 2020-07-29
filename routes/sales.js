@@ -4,4 +4,6 @@ module.exports = function(app) {
 	  	.post(controller.create);
 	app.route('/sales')
 		.get(controller.get);
+	app.route('/sales_date')
+		.get(controller.getByDate);	
 };
