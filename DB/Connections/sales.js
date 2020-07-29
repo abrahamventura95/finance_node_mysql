@@ -38,3 +38,16 @@ exports.getByDate = function (data,callback) {
 		callback(err,data);
 	});
 }
+
+exports.getCntM = function (data,callback){
+	var sqlQuery = "SELECT coin, tag, product, quantity, amount, date		\
+					FROM	money_sales										\
+					WHERE user ='" + data.email +"'				AND			\
+						  type ='" + data.type +"'   			AND			\
+						  YEAR(date) = YEAR(CURRENT_DATE())		AND			\
+						  MONTH(date) = MONTH(CURRENT_DATE())				\
+					ORDER BY date DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});	
+}

@@ -6,4 +6,6 @@ module.exports = function(app) {
 		.get(controller.get);
 	app.route('/sales_date')
 		.get(controller.getByDate);	
+	app.route('/sales_month')
+		.get(controller.getCntM);		
 };
