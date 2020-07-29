@@ -60,7 +60,9 @@ exports.getCntM = function (data,callback){
 }
 
 exports.balance = function (email,callback){
-	var sqlQuery = "SELECT (t1.totals - t2.totals) as balance	\
+	var sqlQuery = "SELECT (t1.totals - t2.totals) as balance, 	\
+							t1.totals as income,				\
+							t2.totals as outflow				\
 					FROM										\
 						(SELECT SUM(amount) as totals			\
 						 FROM money_move						\
