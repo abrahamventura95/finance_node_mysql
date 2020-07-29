@@ -91,3 +91,15 @@ exports.getByDate = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.getCntM = function(req,res){
+	var email = req.param('email');
+	var type = req.param('type');
+	var obj = {
+		email: email,
+		type: type
+	};
+	queries.getCntM(obj, function(err,data){
+		res.json(data);
+	});
+}
