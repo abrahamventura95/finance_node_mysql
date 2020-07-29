@@ -6,4 +6,6 @@ module.exports = function(app) {
 		.get(controller.get);
 	app.route('/graphs')
 		.get(controller.getAll);
+	app.route('/moves_date')
+		.get(controller.getByDate);	
 };

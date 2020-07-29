@@ -77,3 +77,17 @@ exports.getAll = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.getByDate = function(req,res){
+	var email = req.param('email');
+	var date = req.param('date');
+	var type = req.param('type');
+	var obj = {
+		email: email,
+		date: date,
+		type: type
+	};
+	queries.getByDate(obj, function(err,data){
+		res.json(data);
+	});
+}
