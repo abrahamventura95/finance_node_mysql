@@ -50,9 +50,8 @@ exports.login = function (obj, callback) {
 					"msg":"Wrong password"
 				};
 			}else{
-				let payload = {id: data.id};
+				let payload = {sub: data[0].email, type: data[0].type};
 				let token = jwt.sign(payload, jwtOptions.secretOrKey);
-
 				message = { 
 		    		"code":200,
 		      		"success": "login sucessfull",

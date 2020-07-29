@@ -1,19 +1,7 @@
 var user_queries = require('../DB/Connections/users');
-var coin_queries = require('../DB/Connections/coins');
+var fun = require('./functions');
 var validator = require('validator');
 var bcrypt = require('bcrypt');
-
-function findRegisteredEmail(email, callback){
-	user_queries.existsEmail(email,function(err,data){
-		callback(data[0].value);
-	});
-}
-
-function findExistingCoin(coin, callback){
-	coin_queries.existsCoin(coin,function(err,data){
-		callback(data[0].value);
-	});
-}
 
 function validateRegister(body,callback) {
 	//Empty validation
@@ -40,11 +28,11 @@ function validateRegister(body,callback) {
 		 callback('User\'s gender is wrong');
 
 	//Existing validations	
-	findRegisteredEmail(body.email,function(value){
+	fun.findRegisteredEmail(body.email,function(value){
 		if(value == 1){
 			callback('Registered email');
 		}else{
-			findExistingCoin(body.coin,function(value){
+			fun.findExistingCoin(body.coin,function(value){
 				if(value == 0){
 					callback('Unregistered coin');
 				}else{
