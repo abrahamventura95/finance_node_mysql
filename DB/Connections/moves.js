@@ -52,7 +52,7 @@ exports.getCntM = function (data,callback){
 					WHERE user ='" + data.email +"'				AND		\
 						  type ='" + data.type +"'   			AND		\
 						  YEAR(date) = YEAR(CURRENT_DATE())		AND		\
-						  MONTH(date) = MONTH(CURRENT_DATE())	AND		\
+						  MONTH(date) = MONTH(CURRENT_DATE())			\
 					ORDER BY date DESC";	
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);
