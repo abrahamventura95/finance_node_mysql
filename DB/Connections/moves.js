@@ -110,3 +110,14 @@ exports.getByAmount = function (data,callback) {
 		callback(err,data);
 	});
 }
+
+exports.edit = function (data, callback){
+	var sqlQuery = "UPDATE `money_move` SET  				\
+					`tag` ='" + data.tag + "',				\
+					`amount` ='" + data.amount + "',		\
+					`date` ='" + data.date + "'				\
+					WHERE `id`='" + data.id + "'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+};

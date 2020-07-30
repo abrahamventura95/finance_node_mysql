@@ -1,7 +1,8 @@
 module.exports = function(app) {
 	var controller = require('../Controllers/moves');	
 	app.route('/move')
-	  	.post(controller.create);
+	  	.post(controller.create)
+	  	.put(controller.edit);
 	app.route('/moves')
 		.get(controller.get);
 	app.route('/graphs')

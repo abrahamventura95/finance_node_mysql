@@ -60,11 +60,9 @@ exports.create = function (req,res) {
 }
 
 exports.get = function(req,res){
-	var email = req.param('email');
-	var type = req.param('type');
 	var obj = {
-		email: email,
-		type: type
+		email: req.param('email'),
+		type: req.param('type')
 	};
 	queries.get(obj, function(err,data){
 		res.json(data);
@@ -79,13 +77,10 @@ exports.getAll = function(req,res){
 }
 
 exports.getByDate = function(req,res){
-	var email = req.param('email');
-	var date = req.param('date');
-	var type = req.param('type');
 	var obj = {
-		email: email,
-		date: date,
-		type: type
+		email: req.param('email'),
+		date: req.param('date'),
+		type: req.param('type')
 	};
 	queries.getByDate(obj, function(err,data){
 		res.json(data);
@@ -93,11 +88,9 @@ exports.getByDate = function(req,res){
 }
 
 exports.getCntM = function(req,res){
-	var email = req.param('email');
-	var type = req.param('type');
 	var obj = {
-		email: email,
-		type: type
+		email: req.param('email'),
+		type: req.param('type')
 	};
 	queries.getCntM(obj, function(err,data){
 		res.json(data);
@@ -138,6 +131,18 @@ exports.amount = function(req,res){
 		amount: req.param('amount')
 	};
 	queries.getByAmount(obj, function(err,data){
+		res.json(data);
+	});
+}
+
+exports.edit = function(req,res){
+	var obj = {
+		id: req.param('id'),
+		tag: req.body.tag,
+		date: req.body.date,
+		amount: req.body.amount
+	};
+	queries.edit(obj,function(err,data){
 		res.json(data);
 	});
 }

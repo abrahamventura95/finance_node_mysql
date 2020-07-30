@@ -140,6 +140,7 @@ exports.edit = function(req,res){
 		tag: req.body.tag,
 		product: req.body.product,
 		quantity: req.body.quantity,
+		date: req.body.date,
 		amount: req.body.amount
 	};
 	queries.edit(obj,function(err,data){
