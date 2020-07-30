@@ -81,3 +81,25 @@ exports.getByRange = function (data,callback) {
 		callback(err,data);
 	});
 }
+
+exports.getByProduct = function (data,callback) {
+	var sqlQuery = "SELECT coin, type, product, quantity, amount, date		\
+					FROM	money_sales										\
+					WHERE user ='" + data.email +"'	AND						\
+						  product LIKE '%"+data.product+"%'					\
+					ORDER BY date DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}
+
+exports.getByAmount = function (data,callback) {
+	var sqlQuery = "SELECT coin, tag, product, quantity, type, amount, date		\
+					FROM	money_sales											\
+					WHERE user ='" + data.email +"'	AND							\
+						  amount = '"+data.amount+"'							\
+					ORDER BY date DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}

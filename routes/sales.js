@@ -12,4 +12,8 @@ module.exports = function(app) {
 		.get(controller.balance);
 	app.route('/sales_range')
 		.get(controller.range);
+	app.route('/sales_product')
+		.get(controller.product);
+	app.route('/sales_amount')
+		.get(controller.amount);	
 };
