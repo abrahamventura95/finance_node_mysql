@@ -123,3 +123,13 @@ exports.product = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.amount = function(req,res){
+	var obj = {
+		email: req.param('email'),
+		amount: req.param('amount')
+	};
+	queries.getByAmount(obj, function(err,data){
+		res.json(data);
+	});
+}

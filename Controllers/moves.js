@@ -135,7 +135,7 @@ exports.tag = function(req,res){
 exports.amount = function(req,res){
 	var obj = {
 		email: req.param('email'),
-		amout: req.param('amout')
+		amount: req.param('amount')
 	};
 	queries.getByAmount(obj, function(err,data){
 		res.json(data);
