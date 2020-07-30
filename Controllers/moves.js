@@ -110,3 +110,14 @@ exports.balance = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.range = function(req,res){
+	var obj = {
+		email: req.param('email'),
+		date: req.param('begin'),
+		end: req.param('end')
+	};
+	queries.getByRange(obj, function(err,data){
+		res.json(data);
+	});
+}

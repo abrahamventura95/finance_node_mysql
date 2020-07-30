@@ -10,4 +10,6 @@ module.exports = function(app) {
 		.get(controller.getCntM);
 	app.route('/sales_balance')
 		.get(controller.balance);
+	app.route('/sales_range')
+		.get(controller.range);
 };

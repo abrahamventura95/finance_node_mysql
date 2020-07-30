@@ -175,3 +175,17 @@ exports.edit = function(req,res){
 		}
 	});
 }
+
+exports.dltHistory = function(req,res){
+	user_queries.dltHistoryS(req.param('email'), function(err,data){
+		user_queries.dltHistoryM(req.param('email'), function(err,data){
+			res.json(data);
+		});
+	});
+}
+
+exports.delete = function(req,res){
+	user_queries.delete(req.param('email'), function(err,data){
+		res.json(data);
+	});
+}
