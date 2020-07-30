@@ -1,5 +1,6 @@
-module.exports = function(app) {
-	var controller = require('../Controllers/user');
+var controller = require('../Controllers/user');
+
+module.exports = function(app) {	
 	app.route('/perfil')
 	  	.get(controller.getUser);
 	app.route('/users')

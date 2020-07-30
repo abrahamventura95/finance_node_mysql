@@ -17,7 +17,7 @@ exports.create = function (data,callback) {
 }
 
 exports.get = function (data,callback) {
-	var sqlQuery = "SELECT coin, tag, product, quantity, amount, date		\
+	var sqlQuery = "SELECT id, coin, tag, product, quantity, amount, date	\
 					FROM	money_sales										\
 					WHERE user ='"+ data.email + "'	AND						\
 						  type = '" + data.type + "'						\
@@ -28,7 +28,7 @@ exports.get = function (data,callback) {
 }
 
 exports.getByDate = function (data,callback) {
-	var sqlQuery = "SELECT coin, tag, product, quantity, amount, date		\
+	var sqlQuery = "SELECT id, coin, tag, product, quantity, amount, date	\
 					FROM	money_sales										\
 					WHERE user ='" + data.email +"'	AND						\
 						  type ='" + data.type +"'   AND					\
@@ -40,7 +40,7 @@ exports.getByDate = function (data,callback) {
 }
 
 exports.getCntM = function (data,callback){
-	var sqlQuery = "SELECT coin, tag, product, quantity, amount, date		\
+	var sqlQuery = "SELECT id, coin, tag, product, quantity, amount, date	\
 					FROM	money_sales										\
 					WHERE user ='" + data.email +"'				AND			\
 						  type ='" + data.type +"'   			AND			\
@@ -71,11 +71,11 @@ exports.balance = function (email,callback){
 }
 
 exports.getByRange = function (data,callback) {
-	var sqlQuery = "SELECT coin, tag, product, quantity, amount, date	\
-					FROM	money_sales									\
-					WHERE user ='" + data.email +"'	AND					\
-						  date(date) BETWEEN '"+data.begin+"'	AND		\
-						  					 '"+data.end +"'			\
+	var sqlQuery = "SELECT id, coin, tag, product, quantity, amount, date	\
+					FROM	money_sales										\
+					WHERE user ='" + data.email +"'	AND						\
+						  date(date) BETWEEN '"+data.begin+"'	AND			\
+						  					 '"+data.end +"'				\
 					ORDER BY date DESC";	
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);
@@ -83,7 +83,7 @@ exports.getByRange = function (data,callback) {
 }
 
 exports.getByProduct = function (data,callback) {
-	var sqlQuery = "SELECT coin, type, product, quantity, amount, date		\
+	var sqlQuery = "SELECT id, coin, type, product, quantity, amount, date	\
 					FROM	money_sales										\
 					WHERE user ='" + data.email +"'	AND						\
 						  product LIKE '%"+data.product+"%'					\
@@ -94,7 +94,7 @@ exports.getByProduct = function (data,callback) {
 }
 
 exports.getByAmount = function (data,callback) {
-	var sqlQuery = "SELECT coin, tag, product, quantity, type, amount, date		\
+	var sqlQuery = "SELECT id, coin, tag, product, quantity, type, amount, date	\
 					FROM	money_sales											\
 					WHERE user ='" + data.email +"'	AND							\
 						  amount = '"+data.amount+"'							\
@@ -103,3 +103,24 @@ exports.getByAmount = function (data,callback) {
 		callback(err,data);
 	});
 }
+
+exports.edit = function (data, callback){
+	var sqlQuery = "UPDATE `money_sales` SET  				\
+					`tag` ='" + data.tag + "',				\
+					`product` ='" + data.product + "',		\
+					`quantity` ='" + data.quantity + "',	\
+					`amount` ='" + data.amount + "',		\
+					`date` ='" + data.date + "'				\
+					WHERE `id`='" + data.id + "'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+};
+
+exports.delete = function (id, callback){
+	var sqlQuery = "DELETE FROM `money_sales` 		\
+					WHERE `id`='" + id + "'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+};

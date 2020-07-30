@@ -133,3 +133,23 @@ exports.amount = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.edit = function(req,res){
+	var obj = {
+		id: req.param('id'),
+		tag: req.body.tag,
+		product: req.body.product,
+		quantity: req.body.quantity,
+		date: req.body.date,
+		amount: req.body.amount
+	};
+	queries.edit(obj,function(err,data){
+		res.json(data);
+	});
+}
+
+exports.delete = function(req,res){
+	queries.delete(req.param('id'),function(err,data){
+		res.json(data);
+	});
+}
