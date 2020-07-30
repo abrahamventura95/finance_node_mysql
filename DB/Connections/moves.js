@@ -76,3 +76,15 @@ exports.balance = function (email,callback){
 		callback(err,data);
 	});	
 }
+
+exports.getByRange = function (data,callback) {
+	var sqlQuery = "SELECT coin, tag, amount, date						\
+					FROM	money_move									\
+					WHERE user ='" + data.email +"'	AND					\
+						  date(date) BETWEEN '"+data.begin+"'	AND		\
+						  					 '"+data.end +"'			\
+					ORDER BY date DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}

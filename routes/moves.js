@@ -12,4 +12,6 @@ module.exports = function(app) {
 		.get(controller.getCntM);	
 	app.route('/moves_balance')
 		.get(controller.balance);	
+	app.route('/moves_range')
+		.get(controller.range);	
 };
