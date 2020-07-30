@@ -93,7 +93,18 @@ exports.getByTag = function (data,callback) {
 	var sqlQuery = "SELECT coin, type, amount, date				\
 					FROM	money_move							\
 					WHERE user ='" + data.email +"'	AND			\
-						  tag LIKE '%"+data.tag+"%'			\
+						  tag LIKE '%"+data.tag+"%'				\
+					ORDER BY date DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}
+
+exports.getByAmount = function (data,callback) {
+	var sqlQuery = "SELECT coin, tag ,type, amount, date		\
+					FROM	money_move							\
+					WHERE user ='" + data.email +"'	AND			\
+						  amount = '"+data.amount+"'			\
 					ORDER BY date DESC";	
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);

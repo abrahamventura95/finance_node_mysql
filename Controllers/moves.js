@@ -131,3 +131,13 @@ exports.tag = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.amount = function(req,res){
+	var obj = {
+		email: req.param('email'),
+		amout: req.param('amout')
+	};
+	queries.getByAmount(obj, function(err,data){
+		res.json(data);
+	});
+}

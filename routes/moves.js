@@ -16,4 +16,6 @@ module.exports = function(app) {
 		.get(controller.range);	
 	app.route('/moves_tag')
 		.get(controller.tag);	
+	app.route('/moves_amount')
+		.get(controller.amount);	
 };
