@@ -116,3 +116,11 @@ exports.edit = function (data, callback){
 		callback(err,data);
 	});
 };
+
+exports.delete = function (id, callback){
+	var sqlQuery = "DELETE FROM `money_sales` 		\
+					WHERE `id`='" + id + "'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+};
