@@ -1,7 +1,8 @@
 module.exports = function(app) {
 	var controller = require('../Controllers/sales');	
 	app.route('/sale')
-	  	.post(controller.create);
+	  	.post(controller.create)
+	  	.put(controller.edit);
 	app.route('/sales')
 		.get(controller.get);
 	app.route('/sales_date')

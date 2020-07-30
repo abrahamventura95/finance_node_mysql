@@ -14,10 +14,10 @@ exports.create = function (data,callback) {
 }
 
 exports.get = function (data,callback) {
-	var sqlQuery = "SELECT coin, tag, amount, date		\
-					FROM	money_move					\
-					WHERE user ='"+ data.email + "'	AND	\
-						  type = '" + data.type + "'	\
+	var sqlQuery = "SELECT id, coin, tag, amount, date		\
+					FROM	money_move						\
+					WHERE user ='"+ data.email + "'	AND		\
+						  type = '" + data.type + "'		\
 					ORDER BY date DESC";	
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);
@@ -25,9 +25,9 @@ exports.get = function (data,callback) {
 }
 
 exports.getAll = function (email,callback) {
-	var sqlQuery = "SELECT coin, tag, amount, date, type		\
-					FROM	money_move							\
-					WHERE user ='"+ email + "'					\
+	var sqlQuery = "SELECT id, coin, tag, amount, date, type		\
+					FROM	money_move								\
+					WHERE user ='"+ email + "'						\
 					ORDER BY date, type DESC";	
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);
@@ -35,11 +35,11 @@ exports.getAll = function (email,callback) {
 }
 
 exports.getByDate = function (data,callback) {
-	var sqlQuery = "SELECT coin, tag, amount, date				\
-					FROM	money_move							\
-					WHERE user ='" + data.email +"'	AND			\
+	var sqlQuery = "SELECT id, coin, tag, amount, date				\
+					FROM	money_move								\
+					WHERE user ='" + data.email +"'	AND				\
 						  type ='" + data.type +"'   AND			\
-						  date(date) = '"+data.date+"'			\
+						  date(date) = '"+data.date+"'				\
 					ORDER BY date DESC";	
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);
@@ -47,12 +47,12 @@ exports.getByDate = function (data,callback) {
 }
 
 exports.getCntM = function (data,callback){
-	var sqlQuery = "SELECT coin, tag, amount, date						\
-					FROM	money_move									\
-					WHERE user ='" + data.email +"'				AND		\
-						  type ='" + data.type +"'   			AND		\
-						  YEAR(date) = YEAR(CURRENT_DATE())		AND		\
-						  MONTH(date) = MONTH(CURRENT_DATE())			\
+	var sqlQuery = "SELECT id, coin, tag, amount, date						\
+					FROM	money_move										\
+					WHERE user ='" + data.email +"'				AND			\
+						  type ='" + data.type +"'   			AND			\
+						  YEAR(date) = YEAR(CURRENT_DATE())		AND			\
+						  MONTH(date) = MONTH(CURRENT_DATE())				\
 					ORDER BY date DESC";	
 	DBHelper.doQuery(sqlQuery, function(err,data){
 		callback(err,data);
@@ -78,7 +78,7 @@ exports.balance = function (email,callback){
 }
 
 exports.getByRange = function (data,callback) {
-	var sqlQuery = "SELECT coin, tag, amount, date						\
+	var sqlQuery = "SELECT id, coin, tag, amount, date					\
 					FROM	money_move									\
 					WHERE user ='" + data.email +"'	AND					\
 						  date(date) BETWEEN '"+data.begin+"'	AND		\
@@ -90,7 +90,7 @@ exports.getByRange = function (data,callback) {
 }
 
 exports.getByTag = function (data,callback) {
-	var sqlQuery = "SELECT coin, type, amount, date				\
+	var sqlQuery = "SELECT id, coin, type, amount, date			\
 					FROM	money_move							\
 					WHERE user ='" + data.email +"'	AND			\
 						  tag LIKE '%"+data.tag+"%'				\
@@ -101,7 +101,7 @@ exports.getByTag = function (data,callback) {
 }
 
 exports.getByAmount = function (data,callback) {
-	var sqlQuery = "SELECT coin, tag ,type, amount, date		\
+	var sqlQuery = "SELECT id, coin, tag ,type, amount, date	\
 					FROM	money_move							\
 					WHERE user ='" + data.email +"'	AND			\
 						  amount = '"+data.amount+"'			\

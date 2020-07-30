@@ -133,3 +133,16 @@ exports.amount = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.edit = function(req,res){
+	var obj = {
+		id: req.param('id'),
+		tag: req.body.tag,
+		product: req.body.product,
+		quantity: req.body.quantity,
+		amount: req.body.amount
+	};
+	queries.edit(obj,function(err,data){
+		res.json(data);
+	});
+}
