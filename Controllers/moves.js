@@ -146,3 +146,9 @@ exports.edit = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.delete = function(req,res){
+	queries.delete(req.param('id'),function(err,data){
+		res.json(data);
+	});
+}

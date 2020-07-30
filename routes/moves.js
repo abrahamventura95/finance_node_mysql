@@ -1,8 +1,10 @@
+var controller = require('../Controllers/moves');	
+
 module.exports = function(app) {
-	var controller = require('../Controllers/moves');	
 	app.route('/move')
 	  	.post(controller.create)
-	  	.put(controller.edit);
+	  	.put(controller.edit)
+	  	.delete(controller.delete);
 	app.route('/moves')
 		.get(controller.get);
 	app.route('/graphs')

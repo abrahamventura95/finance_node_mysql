@@ -1,5 +1,6 @@
+var controller = require('../Controllers/sales');	
+
 module.exports = function(app) {
-	var controller = require('../Controllers/sales');	
 	app.route('/sale')
 	  	.post(controller.create)
 	  	.put(controller.edit)

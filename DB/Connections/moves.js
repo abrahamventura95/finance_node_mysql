@@ -121,3 +121,11 @@ exports.edit = function (data, callback){
 		callback(err,data);
 	});
 };
+
+exports.delete = function (id, callback){
+	var sqlQuery = "DELETE FROM `money_move` 		\
+					WHERE `id`='" + id + "'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+};
