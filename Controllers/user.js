@@ -183,3 +183,9 @@ exports.dltHistory = function(req,res){
 		});
 	});
 }
+
+exports.delete = function(req,res){
+	user_queries.delete(req.param('email'), function(err,data){
+		res.json(data);
+	});
+}

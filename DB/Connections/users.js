@@ -150,3 +150,11 @@ exports.dltHistoryM = function (email, callback){
 		callback(err,data);
 	});
 };
+
+exports.delete = function (email, callback){
+	var sqlQuery = "DELETE FROM `user`   		\
+					WHERE `email`='"+email+"'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+};
