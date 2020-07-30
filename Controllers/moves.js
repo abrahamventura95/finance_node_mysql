@@ -121,3 +121,13 @@ exports.range = function(req,res){
 		res.json(data);
 	});
 }
+
+exports.tag = function(req,res){
+	var obj = {
+		email: req.param('email'),
+		tag: req.param('tag')
+	};
+	queries.getByTag(obj, function(err,data){
+		res.json(data);
+	});
+}

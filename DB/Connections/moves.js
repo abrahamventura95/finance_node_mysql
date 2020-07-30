@@ -88,3 +88,14 @@ exports.getByRange = function (data,callback) {
 		callback(err,data);
 	});
 }
+
+exports.getByTag = function (data,callback) {
+	var sqlQuery = "SELECT coin, type, amount, date				\
+					FROM	money_move							\
+					WHERE user ='" + data.email +"'	AND			\
+						  tag LIKE '%"+data.tag+"%'			\
+					ORDER BY date DESC";	
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+}
