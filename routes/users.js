@@ -11,5 +11,7 @@ module.exports = function(app) {
 	app.route('/logout')
 	  	.put(controller.logout);
 	app.route('/user')
-		.put(controller.edit);	
+		.put(controller.edit);
+	app.route('/history')
+		.delete(controller.dltHistory)
 };

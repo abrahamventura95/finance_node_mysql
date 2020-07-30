@@ -134,3 +134,19 @@ exports.edit = function(obj, callback) {
 		});
 	}
 };
+
+exports.dltHistoryS = function (email, callback){
+	var sqlQuery = "DELETE FROM `money_sales`   		\
+					WHERE `user`='"+email+"'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+};
+
+exports.dltHistoryM = function (email, callback){
+	var sqlQuery = "DELETE FROM `money_move`   		\
+					WHERE `user`='"+email+"'";
+	DBHelper.doQuery(sqlQuery, function(err,data){
+		callback(err,data);
+	});
+};
