@@ -13,7 +13,7 @@ function validate(body, callback) {
 	if(validator.isEmpty(body.amount))
 		 callback('Amount is required');
 	if(!validator.isFloat(body.amount))
-		 callback('Amount most be a number');
+		 callback('Amount must be a number');
 	if(!validator.isIn(body.type,['income','outflow']))
 		 callback('Type is wrong');
 	fun.findRegisteredEmail(body.email,function(value){
