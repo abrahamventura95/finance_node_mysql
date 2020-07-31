@@ -17,7 +17,7 @@ function validate(body,callback) {
 	if(validator.isEmpty(body.amount))
 		 callback('Amount is required');
 	if(!validator.isFloat(body.amount))
-		 callback('Amount most be a number');
+		 callback('Amount must be a number');
 	if(!validator.isIn(body.type,['income','outflow']))
 		 callback('Type is wrong');
 	fun.findRegisteredEmail(body.email,function(value){
@@ -40,7 +40,7 @@ exports.create = function (req,res) {
 		try{
 			if (value == 'pass') {
 				var sale = {
-					email: req.body.email,
+					email: req.user.sub,
 				    coin: req.body.coin,
 				    type: req.body.type,
 					tag: req.body.tag,
@@ -67,7 +67,7 @@ exports.create = function (req,res) {
 
 exports.get = function (req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		type: req.param('type')
 	};
 	queries.get(obj,function(err,data){
@@ -77,7 +77,7 @@ exports.get = function (req,res){
 
 exports.getByDate = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		date: req.param('date'),
 		type: req.param('type')
 	};
@@ -88,7 +88,7 @@ exports.getByDate = function(req,res){
 
 exports.getCntM = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		type: req.param('type')
 	};
 	queries.getCntM(obj, function(err,data){
@@ -97,15 +97,14 @@ exports.getCntM = function(req,res){
 }
 
 exports.balance = function(req,res){
-	var email = req.param('email');
-	queries.balance(email, function(err,data){
+	queries.balance(req.user.sub, function(err,data){
 		res.json(data);
 	});
 }
 
 exports.range = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		date: req.param('begin'),
 		end: req.param('end')
 	};
@@ -116,7 +115,7 @@ exports.range = function(req,res){
 
 exports.product = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		product: req.param('product')
 	};
 	queries.getByProduct(obj, function(err,data){
@@ -126,7 +125,7 @@ exports.product = function(req,res){
 
 exports.amount = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		amount: req.param('amount')
 	};
 	queries.getByAmount(obj, function(err,data){

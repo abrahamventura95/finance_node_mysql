@@ -1,8 +1,11 @@
 var controller = require('../Controllers/user');
+var auth = require('../Middleware/auth');
 
 module.exports = function(app) {	
-	app.route('/perfil')
-	  	.get(controller.getUser);
+	app.route('/user')
+	  	.get(auth.auth, controller.getUser)
+		.put(auth.auth, controller.edit)
+		.delete(auth.auth, controller.delete);
 	app.route('/users')
 	  	.get(controller.getUsers);	  	
 	app.route('/register')
@@ -10,10 +13,7 @@ module.exports = function(app) {
 	app.route('/login')
 	  	.post(controller.login); 
 	app.route('/logout')
-	  	.put(controller.logout);
-	app.route('/user')
-		.put(controller.edit)
-		.delete(controller.delete);
+	  	.put(auth.auth, controller.logout);
 	app.route('/history')
-		.delete(controller.dltHistory);
+		.delete(auth.auth, controller.dltHistory);
 };

@@ -1,24 +1,25 @@
 var controller = require('../Controllers/moves');	
+var auth = require('../Middleware/auth');
 
 module.exports = function(app) {
 	app.route('/move')
-	  	.post(controller.create)
+	  	.post(auth.auth, controller.create)
 	  	.put(controller.edit)
 	  	.delete(controller.delete);
 	app.route('/moves')
-		.get(controller.get);
+		.get(auth.auth, controller.get);
 	app.route('/graphs')
-		.get(controller.getAll);
+		.get(auth.auth, controller.getAll);
 	app.route('/moves_date')
-		.get(controller.getByDate);	
+		.get(auth.auth, controller.getByDate);	
 	app.route('/moves_month')
-		.get(controller.getCntM);	
+		.get(auth.auth, controller.getCntM);	
 	app.route('/moves_balance')
-		.get(controller.balance);	
+		.get(auth.auth, controller.balance);	
 	app.route('/moves_range')
-		.get(controller.range);	
+		.get(auth.auth, controller.range);	
 	app.route('/moves_tag')
-		.get(controller.tag);	
+		.get(auth.auth, controller.tag);	
 	app.route('/moves_amount')
-		.get(controller.amount);	
+		.get(auth.auth, controller.amount);	
 };

@@ -26,6 +26,8 @@ var Move = require('./routes/moves');
 Move(app);
 var Sale = require('./routes/sales');
 Sale(app);
+var Coin = require('./routes/coins');
+Coin(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
