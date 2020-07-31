@@ -36,7 +36,7 @@ exports.create = function (req,res) {
 		try{
 			if (value == 'pass') {
 				var move = {
-					email: req.body.email,
+					email: req.user.sub,
 				    coin: req.body.coin,
 				    type: req.body.type,
 					tag: req.body.tag,
@@ -61,7 +61,7 @@ exports.create = function (req,res) {
 
 exports.get = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		type: req.param('type')
 	};
 	queries.get(obj, function(err,data){
@@ -70,15 +70,14 @@ exports.get = function(req,res){
 }
 
 exports.getAll = function(req,res){
-	var email = req.param('email');
-	queries.getAll(email, function(err,data){
+	queries.getAll(req.user.sub, function(err,data){
 		res.json(data);
 	});
 }
 
 exports.getByDate = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		date: req.param('date'),
 		type: req.param('type')
 	};
@@ -89,7 +88,7 @@ exports.getByDate = function(req,res){
 
 exports.getCntM = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		type: req.param('type')
 	};
 	queries.getCntM(obj, function(err,data){
@@ -98,15 +97,14 @@ exports.getCntM = function(req,res){
 }
 
 exports.balance = function(req,res){
-	var email = req.param('email');
-	queries.balance(email, function(err,data){
+	queries.balance(req.user.sub, function(err,data){
 		res.json(data);
 	});
 }
 
 exports.range = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		date: req.param('begin'),
 		end: req.param('end')
 	};
@@ -117,7 +115,7 @@ exports.range = function(req,res){
 
 exports.tag = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		tag: req.param('tag')
 	};
 	queries.getByTag(obj, function(err,data){
@@ -127,7 +125,7 @@ exports.tag = function(req,res){
 
 exports.amount = function(req,res){
 	var obj = {
-		email: req.param('email'),
+		email: req.user.sub,
 		amount: req.param('amount')
 	};
 	queries.getByAmount(obj, function(err,data){

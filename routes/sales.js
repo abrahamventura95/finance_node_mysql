@@ -1,22 +1,23 @@
 var controller = require('../Controllers/sales');	
+var auth = require('../Middleware/auth');
 
 module.exports = function(app) {
 	app.route('/sale')
-	  	.post(controller.create)
+	  	.post(auth.auth, controller.create)
 	  	.put(controller.edit)
 	  	.delete(controller.delete);
 	app.route('/sales')
-		.get(controller.get);
+		.get(auth.auth, controller.get);
 	app.route('/sales_date')
-		.get(controller.getByDate);	
+		.get(auth.auth, controller.getByDate);	
 	app.route('/sales_month')
-		.get(controller.getCntM);
+		.get(auth.auth, controller.getCntM);
 	app.route('/sales_balance')
-		.get(controller.balance);
+		.get(auth.auth, controller.balance);
 	app.route('/sales_range')
-		.get(controller.range);
+		.get(auth.auth, controller.range);
 	app.route('/sales_product')
-		.get(controller.product);
+		.get(auth.auth, controller.product);
 	app.route('/sales_amount')
-		.get(controller.amount);	
+		.get(auth.auth, controller.amount);	
 };

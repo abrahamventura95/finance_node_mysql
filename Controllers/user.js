@@ -120,14 +120,13 @@ exports.login = function(req,res){
 }
 
 exports.logout = function(req,res){
-	user_queries.logOut(req.body.email, function(err,data){
+	user_queries.logOut(req.user.sub, function(err,data){
 		res.json(data);
 	});
 }
 
 exports.getUser = function(req,res) {
-	var email = req.param('email');
-	user_queries.getUser(email, function(err,data){
+	user_queries.getUser(req.user.sub, function(err,data){
 		res.json(data);
 	});
 };
@@ -143,7 +142,7 @@ exports.edit = function(req,res){
 			if(value == 'pass'){
 				if(hash != null){
 					var user = {
-						email: req.body.email,
+						email: req.user.sub,
 					    full_name: req.body.full_name,
 					    coin: req.body.coin,
 						password: hash,
@@ -154,7 +153,7 @@ exports.edit = function(req,res){
 					});
 				}else{
 					var user = {
-						email: req.body.email,
+						email: req.user.sub,
 					    full_name: req.body.full_name,
 					    coin: req.body.coin,
 						gender: req.body.gender
@@ -177,15 +176,15 @@ exports.edit = function(req,res){
 }
 
 exports.dltHistory = function(req,res){
-	user_queries.dltHistoryS(req.param('email'), function(err,data){
-		user_queries.dltHistoryM(req.param('email'), function(err,data){
+	user_queries.dltHistoryS(req.user.sub, function(err,data){
+		user_queries.dltHistoryM(req.user.sub, function(err,data){
 			res.json(data);
 		});
 	});
 }
 
 exports.delete = function(req,res){
-	user_queries.delete(req.param('email'), function(err,data){
+	user_queries.delete(req.user.sub, function(err,data){
 		res.json(data);
 	});
 }
